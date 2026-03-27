@@ -15,10 +15,10 @@ function App() {
     setTodos((oldTodo) => oldTodo.filter((Todo) => Todo.id != id))
   }
   const toggleComplete = (id) =>{
-    setTodos((oldTodo) => oldTodo.map((prev) => prev === id ?{...prev,completed: ! prev.completed}:prev))
+    setTodos((oldTodo) => oldTodo.map((prev) => prev.id === id ?{...prev,completed: ! prev.completed}:prev))
   }
   useEffect (()=>{
-  const Todos = JSON.parse(ocalStorage.getItem("Todos"))
+  const Todos = JSON.parse(localStorage.getItem("Todos"))
   if(Todos && Todos.length>0){
     setTodos(Todos)
   }
@@ -40,7 +40,7 @@ function App() {
                         {/*Loop and Add TodoItem here */}
                         {Todos.map((Todo)=>(
                          <div key={Todo.id} className='w-full'>
-                          <TodoItem Todo={Todo}/>
+                          <TodoItem todo={Todo}/>
                          </div>
                         ))}
                     </div>
